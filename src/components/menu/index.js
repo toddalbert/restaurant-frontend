@@ -15,8 +15,8 @@ class Menu extends React.Component {
   componentDidMount() {
     // setTimeout(() => {
     fetch(API_URL + '/menu')
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         this.setState({ isLoaded: true, menu: data })
       })
       .catch(err => console.log('Error fetching menu: ' + err))

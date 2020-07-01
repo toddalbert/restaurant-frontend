@@ -6,6 +6,7 @@ import {
 } from "react-router-dom"
 import Navbar from './components/common/Navbar'
 import Menu from './components/menu'
+import Edit from './components/Edit'
 import './App.css'
 
 function App() {
@@ -14,12 +15,8 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route path="/menu">
-            <Menu />
-          </Route>
-          <Route path="/edit">
-            <p>This is where we will edit our menu.</p>
-          </Route>
+          <Route path="/menu" component={Menu} />
+          <Route path="/edit" component={Edit} />
           <Route exact path="/">
             <h1>Welcome to Lucky #1 Chinese</h1>
           </Route>
