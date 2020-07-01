@@ -3,7 +3,6 @@ import Item from './Item'
 
 function Section(props) {
   let { name, items } = props
-  console.log(name, items)
   return (
     <Fragment>
       <h2>{name.toUpperCase()}</h2>
