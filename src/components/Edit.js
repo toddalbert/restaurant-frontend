@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './edit.css'
 
 class Edit extends Component {
   constructor(props) {
@@ -77,18 +78,15 @@ class Edit extends Component {
               <option value="drinks">Drinks</option>
             </select>
           </label>
-          <br />
           <label htmlFor="name">
             Name:
             <input name="name" type="text" value={name} onChange={this.handleChange} />
           </label>
-          <br />
           <label htmlFor="price">
             Price:
             <input name="price" value={price} onChange={this.handleChange} type="number" min="0.00" max="99.99" step="0.01" />
           </label>
-          <br />
-          <button type="submit">SAVE</button>
+          <button className='save-button' type="submit">SAVE</button>
         </form>
         {message &&
           <h2>{message}</h2>
