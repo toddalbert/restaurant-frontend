@@ -7,6 +7,7 @@ function Login() {
   const [password, setPassword] = useState('')
   const [error, setErrors] = useState('')
   const Auth = useContext(AuthContext)
+  console.log('isLoggedIn? ', Auth.isLoggedIn)
   function handleForm(e) {
     e.preventDefault()
     firebase.auth()
@@ -14,6 +15,7 @@ function Login() {
       .then(res => {
         if (res.user) {
           Auth.setLoggedIn(true)
+          setErrors('You are now logged in!')
         }
       })
       .catch(e => {
@@ -39,7 +41,7 @@ function Login() {
           placeholder="password"
         />
         <br />
-        <button class="googleBtn" type="button">
+        <button className="googleBtn" type="button">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             alt="logo"

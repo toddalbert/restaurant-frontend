@@ -7,13 +7,14 @@ function Join() {
   const [password, setPassword] = useState('')
   const [error, setErrors] = useState('')
   const Auth = useContext(AuthContext)
-  function handleForm(e) {
+  const handleForm = (e) => {
     e.preventDefault()
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-        if (res.user) {
+        if (res.user) { // did it succeed
           Auth.setLoggedIn(true)
+          setErrors('You are now logged in!')
         }
       })
       .catch(e => {
@@ -39,16 +40,16 @@ function Join() {
           placeholder="password"
         />
         <br />
-        <button class="googleBtn" type="button">
+        <button className="googleBtn" type="button">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             alt="logo"
           />
           Join With Google
         </button>
-        <button type="submit">Login</button>
+        <button type="submit">Sign Up</button>
         {error &&
-          <span>{error}</span>
+          <h2>{error}</h2>
         }
       </form>
     </div>

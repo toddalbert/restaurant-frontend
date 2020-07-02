@@ -16,7 +16,7 @@ export const AuthContext = createContext(null)
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
-  console.log(firebase)
+  // console.log(firebase)
   return (
     <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
       <Router>
