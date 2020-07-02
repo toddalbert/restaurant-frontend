@@ -58,3 +58,23 @@ li > a.active {
   text-decoration: underline;
   color: #ff216e;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+.googleBtn {
+  width: 100%;
+  margin: 0 0 50px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.googleBtn img {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0 5px;
+  vertical-align: middle;
+}
