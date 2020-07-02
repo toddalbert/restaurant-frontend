@@ -1,24 +1,48 @@
 import React, { useState, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
 import * as firebase from 'firebase'
 import { AuthContext } from '../../App'
 
-function Join() {
+function Join({ history }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setErrors] = useState('')
+
   const Auth = useContext(AuthContext)
+
   const handleForm = (e) => {
     e.preventDefault()
-    firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(res => {
-        if (res.user) { // did it succeed
-          Auth.setLoggedIn(true)
-          setErrors('You are now logged in!')
-        }
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        firebase.auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(res => {
+            if (res.user) { // did it succeed
+              Auth.setLoggedIn(true)
+              history.push('/edit') // adding a route to history and navigating to it
+              console.log(res.user.photoURL)
+            }
+          })
+          .catch(e => {
+            setErrors(e.message)
+          })
       })
-      .catch(e => {
-        setErrors(e.message)
+  }
+
+  const handleGoogleLogin = () => {
+    let provider = new firebase.auth.GoogleAuthProvider()
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        firebase.auth()
+          .signInWithPopup(provider)
+          .then(res => {
+            Auth.setLoggedIn(true)
+            history.push('/edit')
+            console.log(res.user.photoURL)
+          })
+          .catch(e => {
+            setErrors(e.message)
+          })
       })
   }
   return (
@@ -40,7 +64,8 @@ function Join() {
           placeholder="password"
         />
         <br />
-        <button className="googleBtn" type="button">
+        <button onClick={() => handleGoogleLogin()}
+          className="googleBtn" type="button">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             alt="logo"
@@ -56,4 +81,4 @@ function Join() {
   )
 }
 
-export default Join
+export default withRouter(Join)
