@@ -17,10 +17,10 @@ function Join({ history }) {
         firebase.auth()
           .createUserWithEmailAndPassword(email, password)
           .then(res => {
-            if (res.user) { // did it succeed
-              Auth.setLoggedIn(true)
-              history.push('/edit') // adding a route to history and navigating to it
-              console.log(res.user.photoURL)
+            history.push('/edit') // adding a route to history and navigating to it
+            Auth.setLoggedIn(true)
+            if (res.user.displayName) {
+              Auth.setUserName(res.user.displayName)
             }
           })
           .catch(e => {
@@ -36,9 +36,11 @@ function Join({ history }) {
         firebase.auth()
           .signInWithPopup(provider)
           .then(res => {
-            Auth.setLoggedIn(true)
             history.push('/edit')
-            console.log(res.user.photoURL)
+            Auth.setLoggedIn(true)
+            if (res.user.displayName) {
+              Auth.setUserName(res.user.displayName)
+            }
           })
           .catch(e => {
             setErrors(e.message)

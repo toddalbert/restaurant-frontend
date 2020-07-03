@@ -17,10 +17,10 @@ function Login({ history }) {
         firebase.auth()
           .signInWithEmailAndPassword(email, password)
           .then(res => {
-            if (res.user) { // did it succeed
-              Auth.setLoggedIn(true)
-              history.push('/edit')
-              console.log(res.user.photoURL)
+            history.push('/edit')
+            Auth.setLoggedIn(true)
+            if (res.user.displayName) {
+              Auth.setUserName(res.user.displayName)
             }
           })
           .catch(e => {
@@ -29,16 +29,20 @@ function Login({ history }) {
       })
   }
 
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider()
+  const signInWithGoogle = (service) => {
+    const provider = (service === 'google')
+      ? new firebase.auth.GoogleAuthProvider()
+      : new firebase.auth.FacebookAuthProvider()
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       .then(() => {
         firebase.auth()
           .signInWithPopup(provider)
-          .then(result => {
-            Auth.setLoggedIn(true)
+          .then(res => {
             history.push('/edit')
-            console.log(result.user.photoURL)
+            Auth.setLoggedIn(true)
+            if (res.user.displayName) {
+              Auth.setUserName(res.user.displayName)
+            }
           })
           .catch(e => setErrors(e.message))
       })
@@ -63,7 +67,7 @@ function Login({ history }) {
           placeholder="password"
         />
         <br />
-        <button onClick={() => signInWithGoogle()}
+        <button onClick={() => signInWithGoogle('google')}
           className="googleBtn" type="button">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
@@ -71,6 +75,8 @@ function Login({ history }) {
           />
           Login With Google
         </button>
+        <button onClick={() => signInWithGoogle('facebook')}
+          className="googleBtn" type="button">Login with Facebook</button>
         <button type="submit">Login</button>
         {error &&
           <span>{error}</span>

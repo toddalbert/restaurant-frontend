@@ -16,9 +16,10 @@ export const AuthContext = createContext(null)
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
+  const [userName, setUserName] = useState(null)
   // console.log(firebase)
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn, userName, setUserName }}>
       <Router>
         <div className="App">
           <Navbar />

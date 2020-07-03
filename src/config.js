@@ -1,9 +1,9 @@
 export default {
-  apiKey: "AIzaSyD_fSrVKCOx5c_mou_vIwib9nX8s3RSWo4",
-  authDomain: "auth-test-0630.firebaseapp.com",
-  databaseURL: "https://auth-test-0630.firebaseio.com",
-  projectId: "auth-test-0630",
-  storageBucket: "auth-test-0630.appspot.com",
-  messagingSenderId: "52965657170",
-  appId: "1:52965657170:web:9197770481d08076912d8b"
+  apiKey: "AIzaSyDbjQ0s66e7lH4ez_1SSFzJyihpUTMVLCk",
+  authDomain: "restaurant-react-lc.firebaseapp.com",
+  databaseURL: "https://restaurant-react-lc.firebaseio.com",
+  projectId: "restaurant-react-lc",
+  storageBucket: "restaurant-react-lc.appspot.com",
+  messagingSenderId: "454290714275",
+  appId: "1:454290714275:web:92d87aa1aaa2c065ba9916"
 }
