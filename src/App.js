@@ -19,9 +19,9 @@ function App() {
   const [userName, setUserName] = useState(null)
   // console.log(firebase)
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn, userName, setUserName }}>
-      <Router>
-        <div className="App">
+    <Router>
+      <div className="App">
+        <AuthContext.Provider value={{ isLoggedIn, setLoggedIn, userName, setUserName }}>
           <Navbar />
           <Switch>
             <Route path="/menu" component={Menu} />
@@ -38,9 +38,9 @@ function App() {
               <h1>Welcome Lucky Chinese</h1>
             </Route>
           </Switch>
-        </div>
-      </Router>
-    </AuthContext.Provider>
+        </AuthContext.Provider>
+      </div>
+    </Router>
   )
 }
 
